@@ -13,6 +13,9 @@ void GO_SS_Player::Initialize(void)
 	Player_Vertex.size = D3DXVECTOR2(200.0f, 200.0f);
 	Player_Vertex.delay = 1.0f;
 
+	RunFlameSkip = 0;
+	Run_Tex_Pattern = 0;
+
 	m_Gravity = DEFAULT_GRAVITY;
 	IsJump = false;
 	IsColl = false;
@@ -40,23 +43,31 @@ void GO_SS_Player::Update(void)
 	//キーボード・マウスからの入力をもらってプレイヤーの動きを処理する
 	InputPlayerMove();
 
-	
-
 	//プレイヤーのジャンプの動き
 	PlayerJumpMove();
 
 	//プレイヤーの重力処理
 	PlayerGravity();
 
-	
+	RunFlameSkip++;
+	if (RunFlameSkip >= RUN_FLAMESKIPNUM)
+	{
+		Run_Tex_Pattern++;
+		RunFlameSkip = 0;
+	}
+	if (Run_Tex_Pattern >= 5)
+		Run_Tex_Pattern = 1;
 }
 /*---------------------------------------------
 *				描画処理
 ---------------------------------------------*/
 void GO_SS_Player::Draw(void)
 {
+	u = (Run_Tex_Pattern % TEX_WIDTH_DIV) * U_ADDITION;
+	v = (Run_Tex_Pattern / TEX_HEIGHT_DIV) * V_ADDITION;
+	
 	DrawSprite(Player_Texture, Player_Vertex.pos.x, Player_Vertex.pos.y,
-		Player_Vertex.size.x, Player_Vertex.size.y, 1.0f, 1.0f, 1.0f, 1.0f);
+		Player_Vertex.size.x, Player_Vertex.size.y, u, v, U_ADDITION, V_ADDITION);
 }
 
 

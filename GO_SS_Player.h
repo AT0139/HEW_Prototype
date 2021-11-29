@@ -46,7 +46,12 @@ private:
 
     //Texture
     int Player_Texture;
-    char TEX_NAME[64] = "data/TEXTURE/fall1.png";
+    char TEX_NAME[64] = "data/TEXTURE/run.png";
+
+    float u,v;
+    int Run_Tex_Pattern;
+    int RunFlameSkip;
+
 
     //Action
     FLOAT m_Gravity;
@@ -72,5 +77,14 @@ private:
     void PlayerJumpMove(void);
     
 
+
+    const int RUN_TEX_MAX = 20;
+    const int RUN_FLAMESKIPNUM = 5;
+
+    const int TEX_WIDTH_DIV = 5;
+    const int TEX_HEIGHT_DIV = 4;
+
+    const float U_ADDITION = 1.0f / TEX_WIDTH_DIV;
+    const float V_ADDITION = 1.0f / TEX_HEIGHT_DIV;
 };
 
