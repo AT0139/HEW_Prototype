@@ -16,7 +16,6 @@ public:
     virtual int GetGameScene(void) override { return GAME_SCENE; }
 
     //?????o???
-
     D3DXVECTOR2 GetPos() { return Player_Vertex.pos; }
     D3DXVECTOR2 GetSize() { return  Player_Vertex.size; }
     
@@ -33,12 +32,15 @@ public:
     void AddXPos(FLOAT x) { Player_Vertex.pos.x += x; }
     void AddYPos(FLOAT y) { Player_Vertex.pos.y += y; }
 
+    void ShiftAnimation(int addition) { RunFlameSkip += addition; };
+
+    bool IsTurn;    //ç∂å¸Ç´:true âEå¸Ç´:false
     bool IsJump;
     bool OkJump;
     bool IsColl;
 
-    //not:-1 left:1 right:-1 
-    int IsCollSide;
+    
+    int IsCollSide; //not:-1 left:1 right:-1 
     
 private:
     //GameScene

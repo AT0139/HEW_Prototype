@@ -17,6 +17,7 @@ void GO_SS_Player::Initialize(void)
 	Run_Tex_Pattern = 0;
 
 	m_Gravity = DEFAULT_GRAVITY;
+	IsTurn = false;
 	IsJump = false;
 	IsColl = false;
 	OkJump = true;
@@ -49,7 +50,7 @@ void GO_SS_Player::Update(void)
 	//プレイヤーの重力処理
 	PlayerGravity();
 
-	RunFlameSkip++;
+	//RunFlameSkip++;
 	if (RunFlameSkip >= RUN_FLAMESKIPNUM)
 	{
 		Run_Tex_Pattern++;
@@ -67,7 +68,8 @@ void GO_SS_Player::Draw(void)
 	v = (Run_Tex_Pattern / TEX_HEIGHT_DIV) * V_ADDITION;
 	
 	DrawSprite(Player_Texture, Player_Vertex.pos.x, Player_Vertex.pos.y,
-		Player_Vertex.size.x, Player_Vertex.size.y, u, v, U_ADDITION, V_ADDITION);
+		Player_Vertex.size.x, Player_Vertex.size.y,
+		(IsTurn ? u : u), v, (IsTurn ? U_ADDITION : -U_ADDITION), V_ADDITION);
 }
 
 
